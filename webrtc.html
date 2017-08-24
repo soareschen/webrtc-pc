@@ -2823,7 +2823,7 @@ interface RTCPeerConnection : EventTarget  {
                     <code>true</code>.</p>
                   </li>
                   <li>
-                    <p>Set <var>connection</var>'s <a>signaling state</a> to 
+                    <p>Set <var>connection</var>'s <a>signaling state</a> to
                     <code>"closed"</code>.</p>
                   </li>
                 </ol>
@@ -3834,7 +3834,7 @@ interface RTCIceCandidate {
               </tbody>
             </table>
           </div>
-          <p class="note">The user agent will typically only gather <code>active</code> 
+          <p class="note">The user agent will typically only gather <code>active</code>
           ICE TCP candidates.</p>
         </section>
         <section>
@@ -5522,12 +5522,12 @@ sender.setParameters(params)
       </div>
       <div>
         <pre class="idl">dictionary RTCRtpParameters {
-             DOMString                                 transactionId;
-             sequence&lt;RTCRtpEncodingParameters&gt;        encodings;
-             sequence&lt;RTCRtpHeaderExtensionParameters&gt; headerExtensions;
-             RTCRtcpParameters                         rtcp;
-             sequence&lt;RTCRtpCodecParameters&gt;           codecs;
-             RTCDegradationPreference                  degradationPreference;
+                      DOMString                                       transactionId;
+                      sequence&lt;RTCRtpEncodingParameters&gt;        encodings = [];
+                      sequence&lt;RTCRtpHeaderExtensionParameters&gt; headerExtensions = [];
+             required RTCRtcpParameters                               rtcp;
+                      sequence&lt;RTCRtpCodecParameters&gt;           codecs = [];
+                      RTCDegradationPreference                        degradationPreference;
 };</pre>
         <section>
           <h2>Dictionary <dfn>RTCRtpParameters</dfn> Members</h2>
@@ -5845,9 +5845,9 @@ sender.setParameters(params)
       </div>
       <div>
         <pre class="idl">dictionary RTCRtpHeaderExtensionParameters {
-             DOMString      uri;
-             unsigned short id;
-             boolean        encrypted;
+             required DOMString      uri;
+             required unsigned short id;
+             required boolean        encrypted;
 };</pre>
         <section>
           <h2>Dictionary <dfn>RTCRtpHeaderExtensionParameters</dfn>
@@ -5929,8 +5929,8 @@ sender.setParameters(params)
       </div>
       <div>
         <pre class="idl">dictionary RTCRtpCapabilities {
-             sequence&lt;RTCRtpCodecCapability&gt;           codecs;
-             sequence&lt;RTCRtpHeaderExtensionCapability&gt; headerExtensions;
+             sequence&lt;RTCRtpCodecCapability&gt;           codecs = [];
+             sequence&lt;RTCRtpHeaderExtensionCapability&gt; headerExtensions = [];
 };</pre>
         <section>
           <h2>Dictionary <dfn>RTCRtpCapabilities</dfn> Members</h2>
@@ -6524,7 +6524,7 @@ sender.setParameters(params)
                   <p>If <var>connection</var>'s <a>[[\IsClosed]]</a> slot is
                   <code>true</code>, <a>throw</a> an
                   <code>InvalidStateError</code>.</p>
-                </li>                
+                </li>
                 <li>
                   <p>If <code><var>transceiver</var>.stopped</code> is
                   <code>true</code>, <a>throw</a> an
@@ -8829,7 +8829,7 @@ interface RTCDTMFToneChangeEvent : Event {
                   <var>selector</var> be <code>null</code>.</p>
                 </li>
                 <li>
-                  <p>If <var>selectorArg</var> is a <a>MediaStreamTrack</a> 
+                  <p>If <var>selectorArg</var> is a <a>MediaStreamTrack</a>
                   let <var>selector</var> be a <a>RTCRtpSender</a> or
                   <a>RTCRtpReceiver</a> on <var>connection</var> which
                   <code>track</code> member matches <var>selectorArg</var>.
@@ -10760,7 +10760,7 @@ if (sender.dtmf) {
     log("DTMF function not available");
 
 </pre>
-      
+
       <p>Send the DTMF signal "123" and abort after sending "2".</p>
       <pre class="example highlight">
 if (sender.dtmf) {
@@ -10773,7 +10773,7 @@ if (sender.dtmf) {
 } else
     log("DTMF function not available");
 </pre>
-      
+
       <p>Send the DTMF signal "1234", and light up the active key using
       <code>lightKey(key)</code> while the tone is playing (assuming that
       <code>lightKey("")</code> will darken all the keys):</p>
@@ -10793,7 +10793,7 @@ if (sender.dtmf) {
     log("DTMF function not available");
 
 </pre>
-      
+
       <p>It is always safe to append to the tone buffer. This example appends
       before any tone playout has started as well as during playout.</p>
       <pre class="example highlight">
@@ -10809,7 +10809,7 @@ if (sender.dtmf) {
   };
 } else
     log("DTMF function not available");
-    
+
 </pre>
 
       <p>Send a 1-second "1" tone followed by a 2-second "2" tone:</p>
